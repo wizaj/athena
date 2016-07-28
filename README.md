@@ -11,6 +11,7 @@ Sample app with AT API's - Voice, SMS, USSD, Shortcode demo
 
 ### Create a .env file at the root of the project with the following configs
 
+```
 PORT=
 
 AT_USERNAME=
@@ -20,7 +21,7 @@ DB_HOST=
 DB_NAME=wired
 DB_USER=
 DB_PASS=
-
+```
 
 ### Install Node Modules and start the app
 
