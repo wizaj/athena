@@ -21,6 +21,10 @@ DB_HOST=
 DB_NAME=wired
 DB_USER=
 DB_PASS=
+
+HOUNDIFY_CLIENTID=
+HOUNDIFY_CLIENTKEY=
+HOUNDIFY_USERID=
 ```
 
 ### Install Node Modules and start the app

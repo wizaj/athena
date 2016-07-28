@@ -11,9 +11,9 @@ var Houndify = require('houndify').Houndify;
 
 var houndify = new Houndify({
   auth: {
-    clientId: 'KS3xVzZ3e1LYKPYpje8BVA==',
-    clientKey: 'unUgmQ4ZFvjk4LeJVs5oa16H7V-O4DTbDpJ1-KCSnKpVPu6lP59Y4gyTufdn7_EkGHj8EZGzMIAcLd4F8l-GdA==',
-    userId: 'ijuma@africastalking.com'
+    clientId: process.env.HOUNDIFY_CLIENTID,
+    clientKey: process.env.HOUNDIFY_CLIENTKEY,
+    userId: process.env.HOUNDIFY_USERID
   }
 });
 
