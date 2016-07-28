@@ -2,28 +2,41 @@
 
 var options = require('../config/config');
 var AfricasTalking = require('africastalking')(options.AT);
-var redis = require("redis"),
-    r = redis.createClient();
-
+var redis = require("redis");
+var r = redis.createClient();
 
 exports.voice = function(req, res) {
-  console.log(req.body);
-  var message = "";
+  var incoming = req.body;
 
-  var callerNumber = req.body.callerNumber; // return +88888888
+  // Call active, run response logic
+  if (incoming.isActive === '1') {
+    var callerNumber = incoming.callerNumber;
 
-  console.log(callerNumber);
+    return r.get(callerNumber, function (err, reply) {
+      if (err) {
+        console.log('[ERROR] -> Redis Query');
+        console.log(err);
+        return;
+      }
 
-  r.get(callerNumber, function (err, reply) {
-    message = reply;
-    
-    console.log(message);
+      var message = reply;
+      var response = "<Response><Say>" + message + "</Say></Response>";
 
-    var response = "<Response><Say>" + message + "</Say></Response>";
+    	res.setHeader('Content-Type', 'text/plain');
+    	return res.send(response);
+    });
+  }
 
-  	res.setHeader('Content-Type', 'text/plain');
-  	res.send( response );
-  });
-  
+  // Call not active, meaning delivery status for response
+  if (incoming.isActive === '0') {
+    var voiceDeliveryReport = {
+      id: incoming.sessionId,
+      status: incoming.status
+    }
+
+    console.log('[Voice Delivery Report]');
+  	console.log(JSON.stringify(voiceDeliveryReport, 0, 4) + '\n');
+
+    return res.send(200);
+  }
 };
-

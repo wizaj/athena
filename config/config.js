@@ -1,20 +1,17 @@
 var options = {
   AT : {
-    username : 'IanJuma',
-    apiKey   : '3e87c3a508035b017344e27942033442ae94bb0e38c3fae14155209577b9b41c',
-    format   : 'json'
+    username: process.env.AT_USERNAME,
+    apiKey: process.env.AT_APIKEY,
+    format: 'json'
   },
-
   mysql: {
-    port: '3306',
-    host: 'localhost',
-    db  : 'wired',
-    user: 'root',
-    pass: 'root'
+    host: process.env.DB_HOST,
+    db: process.env.DB_NAME,
+    user: process.env.DB_USER,
+    pass: process.env.DB_PASS
   },
-
   redis: {
-    port: '6709',
+    port: 6709,
     host: 'localhost'
   }
 };

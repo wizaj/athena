@@ -1,9 +1,15 @@
 'use strict';
 
 exports.dlr = function(req, res) {
-	var messageId = req.body.id;
-	var status = req.body.status;
+	var incoming = req.body;
 
-	console.log(messageId, status);
+	var smsDeliveryReport = {
+		id: incoming.id,
+		status: incoming.status
+	}
+
+	console.log('[SMS Delivery Report]');
+	console.log(JSON.stringify(smsDeliveryReport, 0, 4) + '\n');
+
 	res.send(200);
 };
