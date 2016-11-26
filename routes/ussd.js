@@ -16,53 +16,57 @@ exports.wiredUssd = function(req, res) {
   var length = text.split('*').length;
   var txt = text.split('*');
 
-  // look up - is customer? or Agent - offer 2 parts, agent -?
   if (text === '') {
-	message = 'CON Welcome to Wired Networks Ltd \n';
-	message += '1: Enter new device \n';
-	message += '2: Enter sales person\n';
-	message += '3: Check status of mobile device\n';
-	message += '4: Mark device as sold';
+	message = 'CON MOST Data Collection \n';
+	message += '1: Enter new sale \n';
+	message += '2: Information \n';
+	message += '3: Exit\n';
   }
 
   // add device
   else if (text === '1') {
     // check if user is agent
-  	message = 'CON Enter device IMEI number';
+  	message = 'CON Enter name of customer:';
   }
   else if (length === 2 && txt[0] === '1') {
-    message = 'CON Enter device color';
+    message = 'CON Enter contact number:';
   }
   else if (length === 3 && txt[0] === '1') {
-    message = 'CON Enter device model\n';
-    message += 'eg. Nokia 3310';
+    message = 'CON Enter farm location:\n';
   }
   else if (length === 4 && txt[0] === '1') {
-    message = 'CON Enter Warranty status\n';
-    message += '1) Yes / 2) No';
+    message = 'CON Enter farm size:\n';
   }
   else if (length === 5 && txt[0] === '1') {
-    message = 'CON Enter Insurance status\n';
-    message += '1). Yes / 2). No';
+    message = 'CON How many KGs of groundnut seed bought?\n';
   }
   else if (length === 6 && txt[0] === '1') {
-    message = 'CON Is device in stock\n';
-    message += '1). Yes / 2). No';
+    message = 'CON How many KGs of sunflower seed bought?\n';
   }
   else if (length === 7 && txt[0] === '1') {
+    message = 'CON How many KGs of soya seed bought?\n';
+  }
+  else if (length === 8 && txt[0] === '1') {
+    message = 'CON Did customer buy last year?\n';
+    message += '1: Yes \n';
+    message += '2: No \n';
+  }
+  else if (length === 9 && txt[0] === '1') {
     // commit to db
-    message = 'END Device registered';
+    message = 'END Customer recorded';
     var options = text.split('*');
 
-    db.Device.create({
-      imei: options[1],
-      color: options[2],
-      model: options[3],
-      warrant_status: options[4],
-      insurance_status: options[5],
-      in_stock: options[6]
-    }).then(function(device) {
-      console.log('device added', device);
+    db.SeedCustomer.create({
+      name: options[1],
+      phone_number: options[2],
+      farm_location: options[3],
+      farm_size: options[4],
+      groundnut_bought: options[5],
+      sunflower_bought: options[6],
+      soya_bought: options[7],
+      repeat_customer: options[8]
+    }).then(function(SeedCustomer) {
+      console.log('Seed customer added', SeedCustomer);
     });
 
   }
