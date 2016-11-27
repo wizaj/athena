@@ -35,6 +35,6 @@ app.post('/dlrs', dlrs.dlr);
 
 models.sequelize.sync({logging: false}).then(function () {
   var server = app.listen(port, function() {
-      console.log('Magic happens on port ' + server.address().port);
+      console.log('Watch, as the magic happens on port ' + server.address().port);
   });
 });

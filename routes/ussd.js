@@ -74,52 +74,15 @@ exports.wiredUssd = function(req, res) {
   // add sales person
   else if (text === '2') {
     // check is user is agent
-	message = 'CON Enter sales agent name\n';
+  message = 'END Enter the information to be stored  \n';
+  message += 'within 120 seconds to record it. \n';
+  message += 'Developed by Wiza Jalakasi \n';
+  message += 'http://wiza.jalaka.si \n';
+  message += '+265999563706 \n';
   }
-  else if (length === 2 && txt[0] === '2') {
-	message = 'CON Enter sales agent email';
-  }
-  else if (length === 3 && txt[0] === '2') {
-    message = 'CON Enter Agent sales code';
-  }
-  else if (length === 4 && txt[0] === '2') {
-    message = 'CON Enter agent location\n';
-    message += 'eg. Kilimani';
-  }
-  else if (length === 5 && txt[0] === '2') {
-    message = 'END Sales agent added';
-    var options = text.split('*');
-
-    db.Agent.create({
-      name: options[1],
-      primary_email: options[2],
-      agent_sales_code: options[3],
-      location: options[4],
-      phone_number: phoneNumber
-    }).then(function(agent) {
-      console.log('agent person added', agent);
-    });
-  }
-
 
   else if (text === '3') {
-    message = 'CON Enter device IMEI number';
-  }
-  else if (length === 2 && txt[0] === '3') {
-    message = 'CON Enter your ID number';
-  }
-  else if (length === 3 && txt[0] === '3') {
-    // check device authenticity
-    var options = text.split('*');
-
-    db.Device.findOne({
-      where: { imei: options[1] }
-    }).then(function(device) {
-      console.log('device found -', device);
-      message = 'END You have a genuine device';
-    });
-
-    message = 'END You do not have a genuine device';
+    message = 'END Thank you';
   }
 
 
