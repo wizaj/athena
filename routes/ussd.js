@@ -17,9 +17,10 @@ exports.wiredUssd = function(req, res) {
   var txt = text.split('*');
 
   if (text === '') {
-	message = 'CON MOST Data Collection \n';
-	message += '1: Enter new sale \n';
-	message += '2: Information \n';
+	message = 'CON InfoText Surveys\n';
+	message += 'Client: MOST (MW)\n';
+	message += '1: Enter new sale\n';
+	message += '2: Information\n';
 	message += '3: Exit\n';
   }
 
